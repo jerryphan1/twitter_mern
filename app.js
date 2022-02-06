@@ -6,7 +6,7 @@ const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
 const bodyParser = require('body-parser');
 const User = require('./models/User');
-
+const passport = require('passport');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,7 +27,8 @@ app.get("/", (req, res) => {
 });
 
 
-
+app.use(passport.initialize());
+require('./config/passport')(passport);
 app.use("/api/users", users);
 app.use("/api/tweets", tweets);
 
